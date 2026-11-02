@@ -1,0 +1,36 @@
+public class Solution
+{
+    public IList<IList<int>> LevelOrder(TreeNode root)
+    {
+        List<IList<int>> result = new List<IList<int>>();
+
+        if (root == null)
+            return result;
+
+        Queue<TreeNode> queue = new Queue<TreeNode>();
+        queue.Enqueue(root);
+
+        while (queue.Count > 0)
+        {
+            int levelSize = queue.Count;
+            List<int> level = new List<int>();
+
+            for (int i = 0; i < levelSize; i++)
+            {
+                TreeNode current = queue.Dequeue();
+
+                level.Add(current.val);
+
+                if (current.left != null)
+                    queue.Enqueue(current.left);
+
+                if (current.right != null)
+                    queue.Enqueue(current.right);
+            }
+
+            result.Add(level);
+        }
+
+        return result;
+    }
+}
